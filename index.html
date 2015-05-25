@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.demo {
+			    width: 0;
+			    height: 0;
+			    border-left: 50px solid transparent;
+			    border-right: 50px solid transparent;
+			    border-bottom: 100px solid red;
+			    margin: 20px;
+			}
+			pre{
+				margin: 20px;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		宽
+		<input id="tri-width" class="tri-conditions" type="" value="100" />
+		高
+		<input id="tri-height" class="tri-conditions" type="" value="100" />
+		方向
+		<select id="tri-direction" class="tri-conditions">
+			<option>上</option>
+			<option>下</option>
+			<option>左</option>
+			<option>右</option>
+			<option>左上</option>
+			<option>右上</option>
+			<option>左下</option>
+			<option>右下</option>
+		</select>
+		颜色
+		<input id="tri-color" class="color {onImmediateChange:'updateInfo(this);'}" value="FF0000"/>
+		
+		<div class="demo"></div>
+		
+		<pre>css{
+width: 0;
+height: 0;
+border-left: 50px solid transparent;
+border-right: 50px solid transparent;
+border-bottom: 100px solid red;
+}
+		</pre>
+		
+		<script src="js/jquery-2.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jscolor.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+				$("#tri-width").keyup(function(){
+					reDraw();
+				});
+				$("#tri-height").keyup(function(){
+					reDraw();
+				});
+				$("#tri-direction").change(function(){
+					reDraw();
+				});
+			});
+			
+			function updateInfo(color) {
+				reDraw();
+			}
+			
+			function reDraw(){
+				var triW = $("#tri-width").val();
+				var triH = $("#tri-height").val();
+				var triD = $("#tri-direction").val();
+				var triC = $(".color").val();
+				switch (triD){
+					case "上":
+						$(".demo").css({
+							"width": "0",
+						    "height": "0",
+						    "border-top": "none",
+						    "border-left": parseInt(triW/2)+"px solid transparent",
+						    "border-right": parseInt(triW/2)+"px solid transparent",
+						    "border-bottom": parseInt(triH)+"px solid #"+triC
+						});
+						$("pre").html("");
+						$("pre").append("css{<br>");
+						$("pre").append("width: 0;<br>");
+						$("pre").append("height: 0;<br>");
+						$("pre").append("border-left: "+parseInt(triW/2)+"px solid transparent;<br>");
+						$("pre").append("border-right: "+parseInt(triW/2)+"px solid transparent;<br>");
+						$("pre").append("border-bottom: "+parseInt(triH)+"px solid #"+triC+";<br>");
+						$("pre").append("}");
+						break;
+					case "下":
+						$(".demo").css({
+							"width": "0",
+						    "height": "0",
+						    "border-bottom": "none",
+						    "border-left": parseInt(triW/2)+"px solid transparent",
+						    "border-right": parseInt(triW/2)+"px solid transparent",
+						    "border-top": parseInt(triH)+"px solid #"+triC
+						});
+						$("pre").html("");
+						$("pre").append("css{<br>");
+						$("pre").append("width: 0;<br>");
+						$("pre").append("height: 0;<br>");
+						$("pre").append("border-left: "+parseInt(triW/2)+"px solid transparent;<br>");
+						$("pre").append("border-right: "+parseInt(triW/2)+"px solid transparent;<br>");
+						$("pre").append("border-top: "+parseInt(triH)+"px solid #"+triC+";<br>");
+						$("pre").append("}");
+						break;
+					case "左":
+						$(".demo").css({
+							"width": "0",
+						    "height": "0",
+						    "border-left": "none",
+						    "border-top": parseInt(triH/2)+"px solid transparent",
+						    "border-right": parseInt(triW)+"px solid #"+triC,
+						    "border-bottom": parseInt(triH/2)+"px solid transparent"
+						});
+						$("pre").html("");
+						$("pre").append("css{<br>");
+						$("pre").append("width: 0;<br>");
+						$("pre").append("height: 0;<br>");
+						$("pre").append("border-top: "+parseInt(triH/2)+"px solid transparent;<br>");
+						$("pre").append("border-right: "+parseInt(triW)+"px solid #"+triC+";<br>");
+						$("pre").append("border-bottom: "+parseInt(triH/2)+"px solid transparent;<br>");
+						$("pre").append("}");	
+						break;
+					case "右":
+						$(".demo").css({
+							"width": "0",
+						    "height": "0",
+						    "border-right": "none",
+						    "border-top": parseInt(triH/2)+"px solid transparent",
+						    "border-left": parseInt(triW)+"px solid #"+triC,
+						    "border-bottom": parseInt(triH/2)+"px solid transparent"
+						});
+						$("pre").html("");
+						$("pre").append("css{<br>");
+						$("pre").append("width: 0;<br>");
+						$("pre").append("height: 0;<br>");
+						$("pre").append("border-top: "+parseInt(triH/2)+"px solid transparent;<br>");
+						$("pre").append("border-left: "+parseInt(triW)+"px solid #"+triC+";<br>");
+						$("pre").append("border-bottom: "+parseInt(triH/2)+"px solid transparent;<br>");
+						$("pre").append("}");	
+						break;
+					case "左上":
+						$(".demo").css({
+							"width": "0",
+						    "height": "0",
+						    "border-top": parseInt(triH)+"px solid #"+triC,
+						    "border-right": parseInt(triW)+"px solid transparent",
+						    "border-bottom": "none",
+						    "border-left": "none"
+						});
+						$("pre").html("");
+						$("pre").append("css{<br>");
+						$("pre").append("width: 0;<br>");
+						$("pre").append("height: 0;<br>");
+						$("pre").append("border-top: "+parseInt(triH)+"px solid #"+triC+";<br>");
+						$("pre").append("border-right: "+parseInt(triW)+"px solid transparent;<br>");
+						$("pre").append("}");
+						break;
+					case "右上":
+						$(".demo").css({
+							"width": "0",
+						    "height": "0",
+						    "border-top": parseInt(triH)+"px solid #"+triC,
+						    "border-left": parseInt(triW)+"px solid transparent",
+						    "border-bottom": "none",
+						    "border-right": "none"
+						});
+						$("pre").html("");
+						$("pre").append("css{<br>");
+						$("pre").append("width: 0;<br>");
+						$("pre").append("height: 0;<br>");
+						$("pre").append("border-top: "+parseInt(triH)+"px solid #"+triC+";<br>");
+						$("pre").append("border-left: "+parseInt(triW)+"px solid transparent;<br>");
+						$("pre").append("}");
+						break;
+					case "左下":
+						$(".demo").css({
+							"width": "0",
+						    "height": "0",
+						    "border-bottom": parseInt(triH)+"px solid #"+triC,
+						    "border-right": parseInt(triW)+"px solid transparent",
+						    "border-top": "none",
+						    "border-left": "none"
+						});
+						$("pre").html("");
+						$("pre").append("css{<br>");
+						$("pre").append("width: 0;<br>");
+						$("pre").append("height: 0;<br>");
+						$("pre").append("border-bottom: "+parseInt(triH)+"px solid #"+triC+";<br>");
+						$("pre").append("border-right: "+parseInt(triW)+"px solid transparent;<br>");
+						$("pre").append("}");
+						break;
+					case "右下":
+						$(".demo").css({
+							"width": "0",
+						    "height": "0",
+						    "border-bottom": parseInt(triH)+"px solid #"+triC,
+						    "border-left": parseInt(triW)+"px solid transparent",
+						    "border-top": "none",
+						    "border-right": "none"
+						});
+						$("pre").html("");
+						$("pre").append("css{<br>");
+						$("pre").append("width: 0;<br>");
+						$("pre").append("height: 0;<br>");
+						$("pre").append("border-bottom: "+parseInt(triH)+"px solid #"+triC+";<br>");
+						$("pre").append("border-left: "+parseInt(triW)+"px solid transparent;<br>");
+						$("pre").append("}");
+						break;
+					default:
+						break;
+				}
+				console.log(triW+" "+triH+" "+triD+" "+triC);
+			}
+		</script>
+	</body>
+</html>
